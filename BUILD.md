@@ -94,7 +94,7 @@ Files are grouped by their MiSTer install location where possible:
 - `config/` contains `.CFG` files for `/media/fat/config/`.
 - `config/inputs/` contains input `.map` files for `/media/fat/config/inputs/`.
 - `Scripts/` contains helper scripts for `/media/fat/Scripts/`.
-- `_Console/` contains Saturn `.rbf` files for `/media/fat/_Console/`.
+- `_Console/` contains `.rbf` core files for `/media/fat/_Console/`.
 - `Main_MiSTer/binaries/` contains prebuilt Main_MiSTer test binaries.
 - `Main_MiSTer/patches/` contains the source patch for Main_MiSTer.
 

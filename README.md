@@ -14,6 +14,7 @@ Implemented and packaged:
 - A current patched Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer-xgunner-startfix-20260904`.
 - A temporary uinput shim for testing on stock Main_MiSTer.
 - PSX GunCon and Justifier input maps.
+- PSX unstable `.rbf` file used during testing.
 - Saturn Virtua Gun input maps.
 - Saturn `.rbf` and `.CFG` files used during testing.
 
@@ -113,6 +114,10 @@ Justifier profile:
 - Keyboard-side other button: `Start`
 
 In the PSX core OSD, set `Pad1` to `GunCon` or `Justifier` to match the game, then use the matching helper script or copy the matching `.map` file into place.
+
+Included PSX core file:
+
+- `_Console/PSX_unstable_20260821_19f225.rbf`
 
 ### Saturn
 
