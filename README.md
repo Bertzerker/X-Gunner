@@ -4,7 +4,7 @@ This is a public test package for using the X-GUNNER LCD lightgun on MiSTer FPGA
 
 The included Main_MiSTer patch adds native detection for the X-GUNNER USB IDs and treats the gun's absolute mouse interface as a MiSTer lightgun. The package also includes map files and helper scripts for the cores that have been mapped so far.
 
-Build instructions are in `BUILDING.md`. Python helper requirements are in `requirements.txt`.
+Build instructions are in `BUILDING.md`. Python helper requirements are in `REQUIREMENTS.txt`.
 
 ## Status
 

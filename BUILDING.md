@@ -32,7 +32,7 @@ MiSTer test hardware:
 
 Python helper scripts:
 
-- See `requirements.txt`.
+- See `REQUIREMENTS.txt`.
 - No pip install step is needed.
 
 ## Patch Base
