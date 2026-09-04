@@ -1,9 +1,9 @@
-# Building The Patched Main_MiSTer Binary
+# How To Build The Patched Main_MiSTer Binary
 
 Most testers can use the prebuilt binary in this repository:
 
 ```sh
-MiSTer-xgunner-startfix-20260904
+Main_MiSTer/binaries/MiSTer-xgunner-startfix-20260904
 ```
 
 Build from source if you want to review the patch, test against a newer Main_MiSTer revision, or make changes.
@@ -63,7 +63,7 @@ git checkout 915ca3395aa5a26322007974faa757299a56b856
 Apply the X-GUNNER patch from this repository:
 
 ```sh
-git apply /path/to/X-Gunner/Main_MiSTer-xgunner-lightgun.patch
+git apply /path/to/X-Gunner/Main_MiSTer/patches/Main_MiSTer-xgunner-lightgun.patch
 ```
 
 Set up the toolchain if `arm-none-linux-gnueabihf-gcc` is not already on your `PATH`:
@@ -86,6 +86,17 @@ bin/MiSTer
 ```
 
 Copy `bin/MiSTer` to the MiSTer SD card as `/media/fat/MiSTer`, then reboot or restart Main_MiSTer.
+
+## Repository Layout
+
+Files are grouped by their MiSTer install location where possible:
+
+- `config/` contains `.CFG` files for `/media/fat/config/`.
+- `config/inputs/` contains input `.map` files for `/media/fat/config/inputs/`.
+- `Scripts/` contains helper scripts for `/media/fat/Scripts/`.
+- `_Console/` contains Saturn `.rbf` files for `/media/fat/_Console/`.
+- `Main_MiSTer/binaries/` contains prebuilt Main_MiSTer test binaries.
+- `Main_MiSTer/patches/` contains the source patch for Main_MiSTer.
 
 ## Notes
 

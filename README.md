@@ -4,14 +4,14 @@ This is a public test package for using the X-GUNNER LCD lightgun on MiSTer FPGA
 
 The included Main_MiSTer patch adds native detection for the X-GUNNER USB IDs and treats the gun's absolute mouse interface as a MiSTer lightgun. The package also includes map files and helper scripts for the cores that have been mapped so far.
 
-Build instructions are in `BUILDING.md`. Python helper requirements are in `REQUIREMENTS.txt`.
+Build instructions are in `BUILD.md`. Python helper requirements are in `REQUIREMENTS.txt`.
 
 ## Status
 
 Implemented and packaged:
 
 - Native Main_MiSTer lightgun detection patch for X-GUNNER P1-P4 USB IDs.
-- A current patched Main_MiSTer binary for testers: `MiSTer-xgunner-startfix-20260904`.
+- A current patched Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer-xgunner-startfix-20260904`.
 - A temporary uinput shim for testing on stock Main_MiSTer.
 - PSX GunCon and Justifier input maps.
 - Saturn Virtua Gun input maps.
@@ -41,7 +41,7 @@ The important interface is the `Mouse` device. It reports absolute `ABS_X` and `
 
 ## How The Main_MiSTer Patch Works
 
-The patch is in `Main_MiSTer-xgunner-lightgun.patch`.
+The patch is in `Main_MiSTer/patches/Main_MiSTer-xgunner-lightgun.patch`.
 
 It changes `input.cpp` and `menu.cpp` in Main_MiSTer:
 
@@ -62,7 +62,7 @@ The debounce matters because the gun can report tracking and button transitions 
 Use this binary for the latest packaged native test:
 
 ```sh
-MiSTer-xgunner-startfix-20260904
+Main_MiSTer/binaries/MiSTer-xgunner-startfix-20260904
 ```
 
 SHA-256:
@@ -73,11 +73,11 @@ SHA-256:
 
 Older binaries are kept in the repository only as build history while testing:
 
-- `MiSTer-xgunner-20260903`
-- `MiSTer-xgunner-debounce-20260903`
-- `MiSTer-xgunner-p1assign-20260903`
-- `MiSTer-xgunner-splitfix-20260904`
-- `MiSTer-xgunner-analogfix-20260904`
+- `Main_MiSTer/binaries/MiSTer-xgunner-20260903`
+- `Main_MiSTer/binaries/MiSTer-xgunner-debounce-20260903`
+- `Main_MiSTer/binaries/MiSTer-xgunner-p1assign-20260903`
+- `Main_MiSTer/binaries/MiSTer-xgunner-splitfix-20260904`
+- `Main_MiSTer/binaries/MiSTer-xgunner-analogfix-20260904`
 
 ## Tested And Mapped Cores
 
@@ -85,12 +85,12 @@ Older binaries are kept in the repository only as build history while testing:
 
 Mapped profiles:
 
-- `PSX_input_1209_0001_v3.guncon.map`
-- `PSX_input_1209_0001_v3.justifier.map`
+- `config/inputs/PSX_input_1209_0001_v3.guncon.map`
+- `config/inputs/PSX_input_1209_0001_v3.justifier.map`
 
 Active/default map in the package:
 
-- `PSX_input_1209_0001_v3.map`
+- `config/inputs/PSX_input_1209_0001_v3.map`
 
 Helper scripts:
 
@@ -118,13 +118,13 @@ In the PSX core OSD, set `Pad1` to `GunCon` or `Justifier` to match the game, th
 
 Mapped profile:
 
-- `Saturn_input_1209_0001_v3.virtua_gun.map`
+- `config/inputs/Saturn_input_1209_0001_v3.virtua_gun.map`
 
 Active/default maps in the package:
 
-- `Saturn_input_1209_0001_v3.map`
-- `RA_Saturn_input_1209_0001_v3.map`
-- `A0CD-Saturn_input_1209_0001_v3.map`
+- `config/inputs/Saturn_input_1209_0001_v3.map`
+- `config/inputs/RA_Saturn_input_1209_0001_v3.map`
+- `config/inputs/A0CD-Saturn_input_1209_0001_v3.map`
 
 Helper script:
 
@@ -141,12 +141,12 @@ Virtua Gun profile:
 
 Included Saturn core files:
 
-- `Saturn_20251003.rbf`
-- `Saturn_20260713.rbf`
-- `Saturn.CFG`
-- `RA_Saturn.CFG`
-- `A0CD-Saturn.CFG`
-- `Saturn_20260713.CFG`
+- `_Console/Saturn_20251003.rbf`
+- `_Console/Saturn_20260713.rbf`
+- `config/Saturn.CFG`
+- `config/RA_Saturn.CFG`
+- `config/A0CD-Saturn.CFG`
+- `config/Saturn_20260713.CFG`
 
 ## Temporary Shim For Stock Main_MiSTer
 
@@ -155,8 +155,8 @@ The shim is a fallback test path for users who have not replaced their Main_MiST
 Files:
 
 ```sh
-xgunner_lightgun.sh
-xgunner_lightgun_shim.py
+Scripts/xgunner_lightgun.sh
+Scripts/xgunner_lightgun_shim.py
 ```
 
 On MiSTer, install them under `/media/fat/Scripts/`, then run:
@@ -195,9 +195,9 @@ Useful X-GUNNER hotkeys from the manual:
 
 These scripts are included for testers who need to confirm how their gun is being detected:
 
-- `xgunner_probe.sh`
-- `xgunner_abs_probe.py`
-- `xgunner_event_probe.py`
+- `Scripts/xgunner_probe.sh`
+- `Scripts/xgunner_abs_probe.py`
+- `Scripts/xgunner_event_probe.py`
 
 Do not post full probe reports publicly without reviewing them first. Probe reports can include connected USB device names and unique device strings.
 
