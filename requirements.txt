@@ -1,0 +1,9 @@
+# Python requirements for the X-GUNNER helper scripts.
+#
+# No third-party Python packages are required. The helper scripts use only the
+# Python standard library plus Linux input devices exposed by MiSTer.
+#
+# Runtime requirements on MiSTer:
+# - python3
+# - /dev/uinput
+# - permission to read /dev/input/event* and write /dev/uinput

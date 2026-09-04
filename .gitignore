@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+
+*.tmp
+*.bak
+*.orig
+*.rej
+
+__pycache__/
+*.pyc
+
+Main_MiSTer-src/
