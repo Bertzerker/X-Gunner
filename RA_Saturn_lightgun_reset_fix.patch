@@ -1,0 +1,10 @@
+diff --git a/Saturn.sv b/Saturn.sv
+index 1451bbe..edaa33e 100644
+--- a/Saturn.sv
++++ b/Saturn.sv
+@@ -1240 +1240 @@ module emu
+-		.RESET(~rst_sys),
++		.RESET(rst_sys),
+@@ -1297 +1297 @@ module emu
+-		.RESET(~rst_sys),
++		.RESET(rst_sys),

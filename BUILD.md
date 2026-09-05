@@ -97,6 +97,7 @@ Files are grouped by their MiSTer install location where possible:
 - `_Console/` contains `.rbf` core files for `/media/fat/_Console/`.
 - `Main_MiSTer/binaries/` contains prebuilt Main_MiSTer test binaries.
 - `Main_MiSTer/patches/` contains the source patch for Main_MiSTer.
+- `LIGHTGUN_CORES.md` lists the included normal and RetroAchievements core profiles.
 
 ## Notes
 

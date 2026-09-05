@@ -11,3 +11,7 @@ __pycache__/
 *.pyc
 
 Main_MiSTer-src/
+RA_Main_MiSTer/
+RA_Main_MiSTer-src/
+RA_Saturn_MiSTer-src/
+_RA_Cores/

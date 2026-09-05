@@ -4,7 +4,7 @@ This is a public test package for using the X-GUNNER LCD lightgun on MiSTer FPGA
 
 The included Main_MiSTer patch adds native detection for the X-GUNNER USB IDs and treats the gun's absolute mouse interface as a MiSTer lightgun. The package also includes map files and helper scripts for the cores that have been mapped so far.
 
-Build instructions are in `BUILD.md`. Python helper requirements are in `REQUIREMENTS.txt`.
+Build instructions are in `BUILD.md`. Python helper requirements are in `REQUIREMENTS.txt`. Console lightgun profile notes are in `LIGHTGUN_CORES.md`.
 
 ## Status
 
@@ -12,16 +12,22 @@ Implemented and packaged:
 
 - Native Main_MiSTer lightgun detection patch for X-GUNNER P1-P4 USB IDs.
 - A current patched Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer-xgunner-startfix-20260904`.
+- A current patched RetroAchievements Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer_RA-xgunner-v1.12.1-20260905`.
 - A temporary uinput shim for testing on stock Main_MiSTer.
 - PSX GunCon and Justifier input maps.
 - PSX unstable `.rbf` file used during testing.
 - Saturn Virtua Gun input maps.
 - Saturn `.rbf` and `.CFG` files used during testing.
+- NES Zapper configs and input maps for normal and RetroAchievements cores.
+- SNES Super Scope and Justifier configs and input maps for normal and RetroAchievements cores.
+- Genesis/Mega Drive, MegaCD/Sega CD, and S32X lightgun configs and input maps for normal and RetroAchievements cores.
+- SMS Phaser configs and input maps for normal and RetroAchievements cores.
+- Atari 7800 XG-1 configs and input maps for normal and RetroAchievements cores.
 
 Not included:
 
 - The separate input control mapper script. That tool is still experimental and is not part of this repository.
-- Finished mappings for NES, SNES, Genesis, Sega CD, or other lightgun cores.
+- RetroAchievements core `.rbf` files other than specific test binaries documented below. The config and map files target the RA core names, but users should install RA cores from their normal RA source.
 
 ## X-GUNNER Device IDs
 
@@ -80,7 +86,21 @@ Older binaries are kept in the repository only as build history while testing:
 - `Main_MiSTer/binaries/MiSTer-xgunner-splitfix-20260904`
 - `Main_MiSTer/binaries/MiSTer-xgunner-analogfix-20260904`
 
+RetroAchievements Main_MiSTer test binary:
+
+```sh
+Main_MiSTer/binaries/MiSTer_RA-xgunner-v1.12.1-20260905
+```
+
+SHA-256:
+
+```sh
+32e8e3c32c47ddfd63e88bd8aa9a7e5c58ae86e3bf2fed81e669890a7f59fef3
+```
+
 ## Tested And Mapped Cores
+
+PSX and Saturn have direct local testing notes below. The additional NES, SNES, Genesis/Mega Drive, MegaCD/Sega CD, S32X, SMS, and Atari 7800 profiles are configured from MiSTer's published lightgun documentation and core option strings, and need wider testing on real games.
 
 ### PSX
 
@@ -88,10 +108,19 @@ Mapped profiles:
 
 - `config/inputs/PSX_input_1209_0001_v3.guncon.map`
 - `config/inputs/PSX_input_1209_0001_v3.justifier.map`
+- `config/inputs/RA_PSX_input_1209_0001_v3.guncon.map`
+- `config/inputs/RA_PSX_input_1209_0001_v3.justifier.map`
 
 Active/default map in the package:
 
 - `config/inputs/PSX_input_1209_0001_v3.map`
+- `config/inputs/RA_PSX_input_1209_0001_v3.map`
+
+RetroAchievements PSX config profiles:
+
+- `config/RA_PSX.guncon.CFG`
+- `config/RA_PSX.justifier.CFG`
+- `config/RA_PSX.CFG`
 
 Helper scripts:
 
@@ -152,6 +181,44 @@ Included Saturn core files:
 - `config/RA_Saturn.CFG`
 - `config/A0CD-Saturn.CFG`
 - `config/Saturn_20260713.CFG`
+
+RetroAchievements Saturn note:
+
+- The RA Saturn `poc` core needs the upstream lightgun reset fix from MiSTer-devel/Saturn_MiSTer commit `526332d4c06291e4b402ace3c753a4baf08f5074`.
+- The local source patch is `RA_Saturn_lightgun_reset_fix.patch`.
+- Without a rebuilt RA Saturn `.rbf`, maps and Main_MiSTer changes alone are not enough to fix the missing crosshair/trigger behavior.
+
+### Additional Console Lightgun Profiles
+
+See `LIGHTGUN_CORES.md` for the full profile matrix, OSD settings, and button mappings.
+
+New mapped/configured profiles:
+
+- NES Zapper: `NES` and `RA_NES`.
+- SNES Super Scope: `SNES` and `RA_SNES`.
+- SNES Justifier: `SNES` and `RA_SNES`.
+- Genesis / Mega Drive lightgun mode: normal `Genesis` and RA `RA_MegaDrive`.
+- MegaCD / Sega CD Justifier: `MegaCD` and `RA_MegaCD`.
+- MegaCD / Sega CD Menacer: `MegaCD` and `RA_MegaCD`.
+- S32X lightgun mode: `S32X` and `RA_S32X`.
+- SMS Phaser: `SMS` and `RA_SMS`.
+- Atari 7800 XG-1: `Atari7800` and `RA_Atari7800`.
+
+Helper scripts:
+
+```sh
+sh /media/fat/Scripts/xgunner_nes_zapper_map.sh
+sh /media/fat/Scripts/xgunner_snes_super_scope_map.sh
+sh /media/fat/Scripts/xgunner_snes_justifier_map.sh
+sh /media/fat/Scripts/xgunner_genesis_lightgun_map.sh
+sh /media/fat/Scripts/xgunner_megacd_justifier_map.sh
+sh /media/fat/Scripts/xgunner_megacd_menacer_map.sh
+sh /media/fat/Scripts/xgunner_s32x_lightgun_map.sh
+sh /media/fat/Scripts/xgunner_sms_phaser_map.sh
+sh /media/fat/Scripts/xgunner_atari7800_xg1_map.sh
+```
+
+Mega Jet and Mega Gun are not included as separate named profiles because they were not exposed as current MiSTer gun-mode choices in the documentation or core option strings checked for this update.
 
 ## Temporary Shim For Stock Main_MiSTer
 

@@ -1,0 +1,9 @@
+*.sh text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+
+*.CFG binary
+*.cfg binary
+*.map binary
+*.rbf binary

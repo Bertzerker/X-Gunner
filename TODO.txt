@@ -1,5 +1,3 @@
 TODO
 
-1. Add support for more MiSTer lightgun cores.
-2. Map X-GUNNER inputs for more cores.
-3. Make an automatic build script.
+1. Make an automatic build script.
