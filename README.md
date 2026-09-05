@@ -15,9 +15,8 @@ Implemented and packaged:
 - A current patched RetroAchievements Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer_RA-xgunner-v1.12.1-20260905`.
 - A temporary uinput shim for testing on stock Main_MiSTer.
 - PSX GunCon and Justifier input maps.
-- PSX unstable `.rbf` file used during testing.
 - Saturn Virtua Gun input maps.
-- Saturn `.rbf` and `.CFG` files used during testing.
+- Saturn `.CFG` files used during testing.
 - NES Zapper configs and input maps for normal and RetroAchievements cores.
 - SNES Super Scope and Justifier configs and input maps for normal and RetroAchievements cores.
 - Genesis/Mega Drive, MegaCD/Sega CD, and S32X lightgun configs and input maps for normal and RetroAchievements cores.
@@ -27,7 +26,7 @@ Implemented and packaged:
 Not included:
 
 - The separate input control mapper script. That tool is still experimental and is not part of this repository.
-- RetroAchievements core `.rbf` files other than specific test binaries documented below. The config and map files target the RA core names, but users should install RA cores from their normal RA source.
+- MiSTer console core `.rbf` files. The config and map files target normal and RetroAchievements core names, but users should install cores from their normal MiSTer and RetroAchievements sources.
 
 ## X-GUNNER Device IDs
 
@@ -144,9 +143,9 @@ Justifier profile:
 
 In the PSX core OSD, set `Pad1` to `GunCon` or `Justifier` to match the game, then use the matching helper script or copy the matching `.map` file into place.
 
-Included PSX core file:
+PSX test note:
 
-- `_Console/PSX_unstable_20260821_19f225.rbf`
+- The PSX mappings were tested with `PSX_unstable_20260821_19f225.rbf`, but core files are not included in this repository.
 
 ### Saturn
 
@@ -173,14 +172,19 @@ Virtua Gun profile:
 - Right button: `B`
 - Middle button: `C`
 
-Included Saturn core files:
+Included Saturn config files:
 
-- `_Console/Saturn_20251003.rbf`
-- `_Console/Saturn_20260713.rbf`
 - `config/Saturn.CFG`
 - `config/RA_Saturn.CFG`
 - `config/A0CD-Saturn.CFG`
 - `config/Saturn_20260713.CFG`
+
+Saturn core compatibility note:
+
+- `Saturn_20251003.rbf` was tested working with Virtua Cop 2 and X-GUNNER.
+- `Saturn_20260713.rbf` was tested not working for X-GUNNER lightgun input.
+- The RetroAchievements Saturn `poc` core was tested not working for X-GUNNER lightgun input.
+- Core files are not included in this repository.
 
 RetroAchievements Saturn note:
 

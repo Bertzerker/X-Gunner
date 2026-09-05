@@ -11,6 +11,8 @@ The RetroAchievements Saturn core release `poc` appears to predate the upstream 
 - RA `Saturn.rbf` from `odelot/Saturn_MiSTer` release `poc`: lightgun input fails.
 - Patched `MiSTer_RA` launcher now recognizes the X-GUNNER like the normal patched `MiSTer` launcher, so the remaining RA Saturn failure appears to be core-side.
 
+Core `.rbf` files are not included in this repository.
+
 ## Evidence
 
 The current RA Saturn source has both lightgun modules wired as:
