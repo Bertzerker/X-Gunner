@@ -208,6 +208,7 @@ Helper scripts:
 
 ```sh
 sh /media/fat/Scripts/xgunner_nes_zapper_map.sh
+sh /media/fat/Scripts/xgunner_nes_zapper_joy2_map.sh
 sh /media/fat/Scripts/xgunner_snes_super_scope_map.sh
 sh /media/fat/Scripts/xgunner_snes_justifier_map.sh
 sh /media/fat/Scripts/xgunner_genesis_lightgun_map.sh
@@ -219,6 +220,12 @@ sh /media/fat/Scripts/xgunner_atari7800_xg1_map.sh
 ```
 
 Mega Jet and Mega Gun are not included as separate named profiles because they were not exposed as current MiSTer gun-mode choices in the documentation or core option strings checked for this update.
+
+NES note:
+
+- The default NES profile now uses `Zapper(Joy1)` because the tested X-GUNNER P1 receiver is MiSTer player 1.
+- The NES core still feeds the emulated Zapper to the NES game as port 2. The Joy1/Joy2 choice selects which MiSTer input source supplies the lightgun coordinates.
+- Use `xgunner_nes_zapper_joy2_map.sh` only if you manually assign the X-GUNNER as MiSTer player 2.
 
 ## Temporary Shim For Stock Main_MiSTer
 

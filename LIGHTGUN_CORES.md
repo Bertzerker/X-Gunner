@@ -22,7 +22,8 @@ I did not add separate Mega Jet or Mega Gun profiles because those names do not 
 
 | System | Normal core files | RetroAchievements files | Gun profile | Helper script |
 | --- | --- | --- | --- | --- |
-| NES | `NES.CFG`, `NES_input_1209_0001_v3.map` | `RA_NES.CFG`, `RA_NES_input_1209_0001_v3.map` | Zapper | `Scripts/xgunner_nes_zapper_map.sh` |
+| NES | `NES.CFG`, `NES_input_1209_0001_v3.map` | `RA_NES.CFG`, `RA_NES_input_1209_0001_v3.map` | Zapper, Joy1 source default | `Scripts/xgunner_nes_zapper_map.sh` |
+| NES | `NES.zapper_joy2.CFG`, `NES_input_1209_0001_v3.zapper.map` | `RA_NES.zapper_joy2.CFG`, `RA_NES_input_1209_0001_v3.zapper.map` | Zapper, Joy2 source fallback | `Scripts/xgunner_nes_zapper_joy2_map.sh` |
 | SNES | `SNES.CFG`, `SNES_input_1209_0001_v3.map` | `RA_SNES.CFG`, `RA_SNES_input_1209_0001_v3.map` | Super Scope default | `Scripts/xgunner_snes_super_scope_map.sh` |
 | SNES | `SNES.justifier.CFG`, `SNES_input_1209_0001_v3.justifier.map` | `RA_SNES.justifier.CFG`, `RA_SNES_input_1209_0001_v3.justifier.map` | Justifier | `Scripts/xgunner_snes_justifier_map.sh` |
 | Genesis / Mega Drive | `Genesis.CFG`, `Genesis_input_1209_0001_v3.map` | `RA_MegaDrive.CFG`, `RA_MegaDrive_input_1209_0001_v3.map` | Core lightgun mode | `Scripts/xgunner_genesis_lightgun_map.sh` |
@@ -38,7 +39,8 @@ Profile-specific files are included beside the active/default files. For example
 
 These settings are already encoded in the included `.CFG` files where the core exposes them:
 
-- NES: `Peripheral` set to `Zapper (Joy2)` and `Zapper Trigger` set to `Joystick`.
+- NES default: `Peripheral` set to `Zapper (Joy1)` and `Zapper Trigger` set to `Joystick`.
+- NES fallback: `Peripheral` set to `Zapper (Joy2)` and `Zapper Trigger` set to `Joystick` for users who assign the X-GUNNER as MiSTer player 2.
 - SNES Super Scope: `Super Scope` set to `Joy2`, `Super Scope Btn` set to `Joy`, and `Gun Type` set to `Super Scope`.
 - SNES Justifier: `Super Scope` set to `Joy2`, `Super Scope Btn` set to `Joy`, and `Gun Type` set to `Justifier`.
 - Genesis / Mega Drive: `Gun Control` set to `Joy2` and `Gun Fire` set to `Joy`.
@@ -61,6 +63,12 @@ The map files use the X-GUNNER P1 USB ID `1209:0001`.
 | Atari 7800 XG-1 | Fire 1 | Not mapped | Not mapped | Not mapped |
 
 These maps are intentionally conservative. Extra X-GUNNER buttons can be added later if testing shows that a specific game needs a better reload, pause, or secondary-button layout.
+
+## NES Test Note
+
+The initial NES package used `Zapper(Joy2)`, matching the common documentation wording for systems that put the original lightgun on player 2. On the X-GUNNER P1 receiver, the MiSTer input source is player 1, so the NES core needs `Zapper(Joy1)` to receive the aiming coordinates.
+
+This does not move the emulated Zapper to NES controller port 1. The NES core still reports Zapper light/trigger data to the game through the expected NES port; the setting selects the MiSTer-side source device.
 
 ## References
 
