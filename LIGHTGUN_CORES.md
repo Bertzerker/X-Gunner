@@ -65,7 +65,7 @@ Arcade mapping:
 - Trigger: `A`, the main gun/fire input.
 - Mouse 2: `B`, the secondary input, such as grenade or special weapon.
 - Mouse 3: reserved for reload/offscreen shot.
-- `BTN_START` from the patched X-GUNNER `KEY_5` translation: `Start`.
+- Bind `Start` through MiSTer's normal input remap flow or through a harmless key assigned in the X-GUNNER GUI.
 - `5`/`e`: third game button where the core exposes one.
 - `s`: `Coin` / `Select`.
 - `w`: `Pause` where the core exposes one.
@@ -114,7 +114,7 @@ The map files use the X-GUNNER P1 USB ID `1209:0001`.
 | Mouse 1 | Accept | Trigger |
 | Mouse 2 | Decline | A / secondary button |
 | Mouse 3 | Not mapped | Reserved for reload/offscreen shot |
-| Space | OSD menu via `KEY_SPACE -> KEY_F12` | Not mapped |
+| Space | User-bound OSD menu key | Not mapped |
 | `1` / `q` | Not mapped | A / secondary button |
 | `5` / `e` | Not mapped | B button |
 | Enter | Not mapped | Not mapped |
@@ -126,7 +126,7 @@ The map files use the X-GUNNER P1 USB ID `1209:0001`.
 
 Profile-specific files assign that default table to each core's button order:
 
-| Profile | Trigger | Mouse 2 / A | Mouse 3 | Space | `BTN_START` | `5`/`e` | `s` | `w` |
+| Profile | Trigger | Mouse 2 / A | Mouse 3 | Space | Start | `5`/`e` | `s` | `w` |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | PSX GunCon | Circle / shoot | GunCon A | Reserved reload/offscreen | OSD menu | Not mapped | GunCon B | Not mapped | Not mapped |
 | PSX Justifier | Circle / shoot | X / special | Reserved reload/offscreen | OSD menu | Start | Not mapped | Not mapped | Not mapped |

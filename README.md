@@ -1,5 +1,17 @@
 # X-GUNNER on MiSTer FPGA
 
+## Why This Patch Exists
+
+The X-GUNNER receiver appears to MiSTer as a composite USB device. The tested P1 receiver exposes separate keyboard, mouse, and joystick-style input interfaces. The aiming data is reported through the mouse interface as absolute coordinates, while several physical buttons are reported as keyboard or mouse-button events.
+
+That layout does not work cleanly with stock MiSTer:
+
+- The absolute mouse interface needs to be recognized as a MiSTer lightgun before cores can use it like Sinden, Gun4IR, or other supported lightguns.
+- A normal mouse is not enough to operate the MiSTer OSD or activate the gun as a player input device.
+- Keyboard keys that MiSTer already uses for OSD control are awkward to reuse as game buttons. In particular, `Enter` and `Escape` are used as Finish and Cancel in MiSTer's keyboard remap menu, so remapping the X-GUNNER's physical Enter button inside MiSTer is unreliable.
+
+For current testing, the recommended setup is to use the X-GUNNER GUI to remap the gun's physical Enter button to a harmless key such as `M`, then bind that new key in MiSTer like a normal game button. Bind the OSD/menu button through MiSTer's normal input remap flow.
+
 This is a public test package for using the X-GUNNER LCD lightgun on MiSTer FPGA.
 
 The included Main_MiSTer patch adds native detection for the X-GUNNER USB IDs and treats the gun's absolute mouse interface as a MiSTer lightgun. The package also includes map files and helper scripts for the cores that have been mapped so far.
@@ -11,8 +23,8 @@ Build instructions are in `BUILD.md`. Python helper requirements are in `REQUIRE
 Implemented and packaged:
 
 - Native Main_MiSTer lightgun detection patch for X-GUNNER P1-P4 USB IDs.
-- A current patched Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer-xgunner-fw-detect-20260907`.
-- A current patched RetroAchievements Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer_RA-xgunner-fw-detect-20260907`.
+- A current patched Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer-xgunner-lightgun-only-20260907`.
+- A current patched RetroAchievements Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer_RA-xgunner-lightgun-only-20260907`.
 - A temporary uinput shim for testing on stock Main_MiSTer.
 - PSX GunCon and Justifier input maps.
 - Normal PSX GunCon and Justifier config profiles.
@@ -65,8 +77,8 @@ It changes `input.cpp` and `menu.cpp` in Main_MiSTer:
 - Marks the device as a MiSTer lightgun and assigns the player number from the product ID.
 - Sets the default calibration range to X/Y `0` through `32767`, matching the observed absolute axis range.
 - Calls the X-GUNNER setup both during normal input detection and after MiSTer merges related input interfaces.
-- Converts X-GUNNER `KEY_5` into `BTN_START`, because the gun exposes some controls through its keyboard interface.
-- Keeps `config/inputs/kbd_1209_0001.map` limited to `KEY_SPACE -> KEY_F12`. Do not remap `Enter` or `Escape`; MiSTer's keyboard remap menu uses them as Finish and Cancel.
+- Leaves keyboard-button mapping to MiSTer config or to the X-GUNNER GUI. The patch does not translate X-GUNNER keyboard keys into gamepad buttons.
+- Does not ship a `kbd_1209_0001.map` keyboard remap. Do not remap `Enter` or `Escape`; MiSTer's keyboard remap menu uses them as Finish and Cancel.
 - Stops raw X-GUNNER absolute-axis events from advancing the lightgun calibration menu before a button press.
 - Adds a calibration debounce timer: 750 ms when entering calibration, then 350 ms after each accepted calibration edge.
 
@@ -77,13 +89,13 @@ The debounce matters because the gun can report tracking and button transitions 
 Use this binary for the latest packaged native test:
 
 ```sh
-Main_MiSTer/binaries/MiSTer-xgunner-fw-detect-20260907
+Main_MiSTer/binaries/MiSTer-xgunner-lightgun-only-20260907
 ```
 
 SHA-256:
 
 ```sh
-716a04e4f0fef0073ceb87634c04aede57758b72c97660bc31234d6906880138
+f403514eabd6fd647f6f9cb7904e769b9f82511f9e9003398532aaf06ad14f31
 ```
 
 Older binaries are kept in the repository only as build history while testing:
@@ -95,17 +107,18 @@ Older binaries are kept in the repository only as build history while testing:
 - `Main_MiSTer/binaries/MiSTer-xgunner-analogfix-20260904`
 - `Main_MiSTer/binaries/MiSTer-xgunner-startfix-20260904`
 - `Main_MiSTer/binaries/MiSTer-xgunner-fw-detect-20260907`
+- `Main_MiSTer/binaries/MiSTer-xgunner-lightgun-only-20260907`
 
 RetroAchievements Main_MiSTer test binary:
 
 ```sh
-Main_MiSTer/binaries/MiSTer_RA-xgunner-fw-detect-20260907
+Main_MiSTer/binaries/MiSTer_RA-xgunner-lightgun-only-20260907
 ```
 
 SHA-256:
 
 ```sh
-1ac7a3d3162f491b305a46c58c9084cd78207f7d1d1ba2eb4ec1228ee342e06a
+096aebbc13fb2b8d27468bc3395f7a93b23280de1c9d53e34246ebf02063be84
 ```
 
 ## Tested And Mapped Cores
@@ -175,7 +188,7 @@ Justifier profile:
 - Trigger: `Circle` / shoot
 - Mouse 2: `X` / special
 - Mouse 3: reserved for reload/offscreen shot
-- `BTN_START` from the patched X-GUNNER `KEY_5` translation: `Start`
+- Bind `Start` through MiSTer's normal input remap flow or through a harmless key assigned in the X-GUNNER GUI.
 
 In the PSX core OSD, set `Pad1` to `GunCon` or `Justifier` to match the game, then use the matching helper script or copy the matching `.map` file into place.
 
@@ -212,7 +225,7 @@ Virtua Gun profile:
 - Mouse 2: `B`
 - Mouse 3: reserved for reload/offscreen shot
 - `5`/`e`: `C`
-- `BTN_START` from the patched X-GUNNER `KEY_5` translation: `Start`
+- Bind `Start` through MiSTer's normal input remap flow or through a harmless key assigned in the X-GUNNER GUI.
 
 Included Saturn config files:
 
@@ -288,7 +301,7 @@ Arcade mapping:
 - Trigger: `A`, main gun/fire.
 - Mouse 2: `B`, secondary input such as grenade or special weapon.
 - Mouse 3: reserved for reload/offscreen shot.
-- `BTN_START` from the patched X-GUNNER `KEY_5` translation: `Start`.
+- Bind `Start` through MiSTer's normal input remap flow or through a harmless key assigned in the X-GUNNER GUI.
 - `5`/`e`: third game button where the core exposes one.
 - `s`: `Coin` / `Select`.
 - `w`: `Pause` where the core exposes one.

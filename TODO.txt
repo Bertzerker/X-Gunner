@@ -2,20 +2,21 @@ TODO
 
 Current verified baseline:
 
-1. Installed Main_MiSTer binary: `Main_MiSTer/binaries/MiSTer-xgunner-fw-detect-20260907`.
-2. Installed RA Main_MiSTer binary: `Main_MiSTer/binaries/MiSTer_RA-xgunner-fw-detect-20260907`.
+1. Current packaged Main_MiSTer binary: `Main_MiSTer/binaries/MiSTer-xgunner-lightgun-only-20260907`.
+2. Current packaged RA Main_MiSTer binary: `Main_MiSTer/binaries/MiSTer_RA-xgunner-lightgun-only-20260907`.
 3. X-GUNNER firmware update still uses VID/PID `1209:0001`, but the PC now exposes serial, keyboard, mouse, and game-controller interfaces.
-4. The native patch now detects X-GUNNER P1-P4 by VID/PID only, so it does not depend on the device name containing `XGUNNER`.
+4. The native patch detects X-GUNNER P1-P4 by VID/PID only, so it does not depend on the device name containing `XGUNNER`.
 5. Aiming works again and plugging in the X-GUNNER no longer breaks the Retro-bit gamepad.
 6. The generic X-GUNNER input map created through the MiSTer OSD works and is mirrored in `config/inputs/input_1209_0001_v3.map`.
-7. `config/inputs/kbd_1209_0001.map` intentionally contains only `KEY_SPACE -> KEY_F12`.
-8. Do not remap X-GUNNER `Enter` or `Escape`. MiSTer's keyboard remap menu uses `Enter` as Finish and `Escape` as Cancel, so changing either one is unreliable.
-9. The X-GUNNER OSD menu shortcut is the gun's `Space` key.
+7. Do not ship `config/inputs/kbd_1209_0001.map`; OSD/menu binding should be user config made through MiSTer's normal input remap flow.
+8. Do not remap X-GUNNER `Enter` or `Escape` inside MiSTer. MiSTer's keyboard remap menu uses `Enter` as Finish and `Escape` as Cancel, so changing either one is unreliable.
+9. The X-GUNNER OSD menu shortcut was successfully bound through MiSTer's OSD instead of through the package patch/config.
 10. Remapping the physical X-GUNNER Enter button to `M` in the X-GUNNER GUI works without problems.
+11. The patch no longer translates X-GUNNER keyboard keys, including `KEY_5`, into gamepad buttons.
 
 Open tasks:
 
-1. Confirm after a cold boot that Space opens/closes the OSD in a core, Mouse 1 accepts OSD items, and Mouse 2 cancels/back works if mapped in the generic OSD input map.
+1. Confirm after a cold boot that the user-bound OSD/menu button opens/closes the OSD in a core, Mouse 1 accepts OSD items, and Mouse 2 cancels/back works if mapped in the generic OSD input map.
 2. Bind the X-GUNNER GUI remapped `M` key in MiSTer like a normal game button where an extra physical button is needed.
 3. Test whether Mouse 2 and Mouse 3 can also be changed in the X-GUNNER GUI to unique keyboard keys. Leave the absolute aiming/mouse movement output unchanged.
 4. Later, investigate whether the X-GUNNER serial protocol can be driven from MiSTer to update button mappings without the PC GUI.

@@ -51,8 +51,8 @@ X-GUNNER arcade layout:
   Trigger: shoot/fire
   Mouse2: secondary weapon when the core exposes one
   Mouse3: reserved for reload/offscreen shot
-  Space: OSD menu
-  BTN_START: Start
+  Space: user-bound OSD menu key
+  Start: bind through MiSTer or through a harmless key assigned in the X-GUNNER GUI
   5/e: B button when the core exposes one
   s: Coin/Select
   w: Pause when the core exposes one
@@ -110,11 +110,11 @@ case "$profile" in
     ;;
   psx-justifier|justifier)
     set_psx_profile "justifier"
-    echo "PSX Justifier: trigger=shoot, mouse2=special, mouse3=reserved reload/offscreen, BTN_START=Start, Space=OSD"
+    echo "PSX Justifier: trigger=shoot, mouse2=special, mouse3=reserved reload/offscreen, Start=bind normally"
     ;;
   saturn|saturn-virtua-gun|virtua-gun)
     set_saturn_profile
-    echo "Saturn Virtua Gun: trigger=A/shoot, mouse2=B, mouse3=reserved reload/offscreen, BTN_START=Start, 5/e=C, Space=OSD"
+    echo "Saturn Virtua Gun: trigger=A/shoot, mouse2=B, mouse3=reserved reload/offscreen, 5/e=C, Start=bind normally"
     ;;
   nes|nes-zapper)
     set_pair_profile "NES" "RA_NES" "zapper"
@@ -137,19 +137,19 @@ case "$profile" in
     ;;
   genesis|megadrive)
     set_pair_profile "Genesis" "RA_MegaDrive" "lightgun"
-    echo "Genesis/Mega Drive: trigger=A, mouse2=B, mouse3=reserved reload/offscreen, BTN_START=Start, 5/e=C, Space=OSD"
+    echo "Genesis/Mega Drive: trigger=A, mouse2=B, mouse3=reserved reload/offscreen, 5/e=C, Start=bind normally"
     ;;
   megacd-justifier|segacd-justifier)
     set_pair_profile "MegaCD" "RA_MegaCD" "justifier"
-    echo "MegaCD Justifier: trigger=A, mouse2=B, mouse3=reserved reload/offscreen, BTN_START=Start, 5/e=C, Space=OSD"
+    echo "MegaCD Justifier: trigger=A, mouse2=B, mouse3=reserved reload/offscreen, 5/e=C, Start=bind normally"
     ;;
   megacd-menacer|segacd-menacer)
     set_pair_profile "MegaCD" "RA_MegaCD" "menacer"
-    echo "MegaCD Menacer: trigger=A, mouse2=B, mouse3=reserved reload/offscreen, BTN_START=Start, 5/e=C, Space=OSD"
+    echo "MegaCD Menacer: trigger=A, mouse2=B, mouse3=reserved reload/offscreen, 5/e=C, Start=bind normally"
     ;;
   s32x)
     set_pair_profile "S32X" "RA_S32X" "lightgun"
-    echo "S32X: trigger=A, mouse2=B, mouse3=reserved reload/offscreen, BTN_START=Start, 5/e=C, Space=OSD"
+    echo "S32X: trigger=A, mouse2=B, mouse3=reserved reload/offscreen, 5/e=C, Start=bind normally"
     ;;
   sms|sms-phaser)
     set_pair_profile "SMS" "RA_SMS" "phaser"
