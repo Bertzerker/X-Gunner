@@ -11,10 +11,12 @@ Build instructions are in `BUILD.md`. Python helper requirements are in `REQUIRE
 Implemented and packaged:
 
 - Native Main_MiSTer lightgun detection patch for X-GUNNER P1-P4 USB IDs.
-- A current patched Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer-xgunner-startfix-20260904`.
-- A current patched RetroAchievements Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer_RA-xgunner-v1.12.1-20260905`.
+- A current patched Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer-xgunner-fw-detect-20260907`.
+- A current patched RetroAchievements Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer_RA-xgunner-fw-detect-20260907`.
 - A temporary uinput shim for testing on stock Main_MiSTer.
 - PSX GunCon and Justifier input maps.
+- Normal PSX GunCon and Justifier config profiles.
+- PSX 2X CPU GunCon and Justifier input maps for both `PSX_2XCPU` and `PSX2XCPU` launch names.
 - Saturn Virtua Gun input maps.
 - Saturn `.CFG` files used during testing.
 - NES Zapper configs and input maps for normal and RetroAchievements cores.
@@ -22,6 +24,7 @@ Implemented and packaged:
 - Genesis/Mega Drive, MegaCD/Sega CD, and S32X lightgun configs and input maps for normal and RetroAchievements cores.
 - SMS Phaser configs and input maps for normal and RetroAchievements cores.
 - Atari 7800 XG-1 configs and input maps for normal and RetroAchievements cores.
+- Arcade input maps for Laser Ghost, N.Y. Captor, Colt, Bronx, Operation Wolf variants, and Point Blank 2 / Gunbarl variants.
 
 Not included:
 
@@ -45,6 +48,11 @@ The tested P1 gun appeared as these Linux input interfaces:
 
 The important interface is the `Mouse` device. It reports absolute `ABS_X` and `ABS_Y` coordinates from `0` to `32767`, plus mouse button events.
 
+Firmware GUI note:
+
+- Remapping the physical X-GUNNER Enter button to `M` in the X-GUNNER GUI was tested working. This is the preferred way to make that physical button available to MiSTer; do not use MiSTer's keyboard remap to turn Enter into an OSD key.
+- The X-GUNNER GUI can update the mapping over the serial connection without reflashing the device. A future MiSTer-side helper may be able to send the same serial commands.
+
 ## How The Main_MiSTer Patch Works
 
 The patch is in `Main_MiSTer/patches/Main_MiSTer-xgunner-lightgun.patch`.
@@ -52,12 +60,13 @@ The patch is in `Main_MiSTer/patches/Main_MiSTer-xgunner-lightgun.patch`.
 It changes `input.cpp` and `menu.cpp` in Main_MiSTer:
 
 - Adds `input_is_xgunner()` to recognize VID `1209` with PID `0001` through `0004`.
-- Requires the device name or ID string to contain `XGUNNER`, so the patch does not match every `1209:*` device blindly.
+- Detects X-GUNNER by VID `1209` and PID `0001` through `0004`, without depending on the reported device name. This keeps detection working after firmware updates that change the USB interface layout.
 - Adds `input_xgunner_setup()` to mark the device as `QUIRK_LIGHTGUN_MOUSE`.
 - Marks the device as a MiSTer lightgun and assigns the player number from the product ID.
 - Sets the default calibration range to X/Y `0` through `32767`, matching the observed absolute axis range.
 - Calls the X-GUNNER setup both during normal input detection and after MiSTer merges related input interfaces.
 - Converts X-GUNNER `KEY_5` into `BTN_START`, because the gun exposes some controls through its keyboard interface.
+- Keeps `config/inputs/kbd_1209_0001.map` limited to `KEY_SPACE -> KEY_F12`. Do not remap `Enter` or `Escape`; MiSTer's keyboard remap menu uses them as Finish and Cancel.
 - Stops raw X-GUNNER absolute-axis events from advancing the lightgun calibration menu before a button press.
 - Adds a calibration debounce timer: 750 ms when entering calibration, then 350 ms after each accepted calibration edge.
 
@@ -68,13 +77,13 @@ The debounce matters because the gun can report tracking and button transitions 
 Use this binary for the latest packaged native test:
 
 ```sh
-Main_MiSTer/binaries/MiSTer-xgunner-startfix-20260904
+Main_MiSTer/binaries/MiSTer-xgunner-fw-detect-20260907
 ```
 
 SHA-256:
 
 ```sh
-867ffc1f2c297612a0f6ceab9cb7f93f2c903c0cb42bb20fe8d2169dda86e231
+716a04e4f0fef0073ceb87634c04aede57758b72c97660bc31234d6906880138
 ```
 
 Older binaries are kept in the repository only as build history while testing:
@@ -84,17 +93,19 @@ Older binaries are kept in the repository only as build history while testing:
 - `Main_MiSTer/binaries/MiSTer-xgunner-p1assign-20260903`
 - `Main_MiSTer/binaries/MiSTer-xgunner-splitfix-20260904`
 - `Main_MiSTer/binaries/MiSTer-xgunner-analogfix-20260904`
+- `Main_MiSTer/binaries/MiSTer-xgunner-startfix-20260904`
+- `Main_MiSTer/binaries/MiSTer-xgunner-fw-detect-20260907`
 
 RetroAchievements Main_MiSTer test binary:
 
 ```sh
-Main_MiSTer/binaries/MiSTer_RA-xgunner-v1.12.1-20260905
+Main_MiSTer/binaries/MiSTer_RA-xgunner-fw-detect-20260907
 ```
 
 SHA-256:
 
 ```sh
-32e8e3c32c47ddfd63e88bd8aa9a7e5c58ae86e3bf2fed81e669890a7f59fef3
+1ac7a3d3162f491b305a46c58c9084cd78207f7d1d1ba2eb4ec1228ee342e06a
 ```
 
 ## Tested And Mapped Cores
@@ -109,11 +120,23 @@ Mapped profiles:
 - `config/inputs/PSX_input_1209_0001_v3.justifier.map`
 - `config/inputs/RA_PSX_input_1209_0001_v3.guncon.map`
 - `config/inputs/RA_PSX_input_1209_0001_v3.justifier.map`
+- `config/inputs/PSX_2XCPU_input_1209_0001_v3.guncon.map`
+- `config/inputs/PSX_2XCPU_input_1209_0001_v3.justifier.map`
+- `config/inputs/PSX2XCPU_input_1209_0001_v3.guncon.map`
+- `config/inputs/PSX2XCPU_input_1209_0001_v3.justifier.map`
 
 Active/default map in the package:
 
 - `config/inputs/PSX_input_1209_0001_v3.map`
 - `config/inputs/RA_PSX_input_1209_0001_v3.map`
+- `config/inputs/PSX_2XCPU_input_1209_0001_v3.map`
+- `config/inputs/PSX2XCPU_input_1209_0001_v3.map`
+
+Normal PSX config profiles:
+
+- `config/PSX.guncon.CFG`
+- `config/PSX.justifier.CFG`
+- `config/PSX.CFG`
 
 RetroAchievements PSX config profiles:
 
@@ -121,9 +144,21 @@ RetroAchievements PSX config profiles:
 - `config/RA_PSX.justifier.CFG`
 - `config/RA_PSX.CFG`
 
+PlayStation 2X CPU config profiles:
+
+- `config/PSX_2XCPU.guncon.CFG`
+- `config/PSX_2XCPU.justifier.CFG`
+- `config/PSX_2XCPU.CFG`
+- `config/PSX2XCPU.guncon.CFG`
+- `config/PSX2XCPU.justifier.CFG`
+- `config/PSX2XCPU.CFG`
+
 Helper scripts:
 
 ```sh
+sh /media/fat/Scripts/xgunner_map.sh
+sh /media/fat/Scripts/xgunner_map.sh psx-guncon
+sh /media/fat/Scripts/xgunner_map.sh psx-justifier
 sh /media/fat/Scripts/xgunner_psx_guncon_map.sh
 sh /media/fat/Scripts/xgunner_psx_justifier_map.sh
 ```
@@ -131,21 +166,26 @@ sh /media/fat/Scripts/xgunner_psx_justifier_map.sh
 GunCon profile:
 
 - Trigger: `Circle` / shoot
-- Right button: `Start` / Gun A
-- Middle button: `X` / Gun B
+- Mouse 2: `Start` / GunCon A
+- Mouse 3: reserved for reload/offscreen shot
+- `5`/`e`: `X` / GunCon B
 
 Justifier profile:
 
 - Trigger: `Circle` / shoot
-- Right button: `X` / special
-- Middle button: `Triangle` / reload
-- Keyboard-side other button: `Start`
+- Mouse 2: `X` / special
+- Mouse 3: reserved for reload/offscreen shot
+- `BTN_START` from the patched X-GUNNER `KEY_5` translation: `Start`
 
 In the PSX core OSD, set `Pad1` to `GunCon` or `Justifier` to match the game, then use the matching helper script or copy the matching `.map` file into place.
 
 PSX test note:
 
-- The PSX mappings were tested with `PSX_unstable_20260821_19f225.rbf`, but core files are not included in this repository.
+- The PSX mappings were tested with `PSX_unstable_20260821_19f225.rbf`.
+- The official stable core `PSX_20260807.rbf` was downloaded from `MiSTer-devel/Distribution_MiSTer` and installed on the test MiSTer, but core `.rbf` files are not included in this repository.
+- `_Console/PlayStation (2X CPU).mgl` uses setname `PSX_2XCPU`.
+- `_Other/PSX2XCPU_20260413.rbf` may use `PSX2XCPU` when launched directly.
+- The PSX helper scripts update normal PSX, RA PSX, and both 2X CPU launch names together.
 
 ### Saturn
 
@@ -162,15 +202,17 @@ Active/default maps in the package:
 Helper script:
 
 ```sh
+sh /media/fat/Scripts/xgunner_map.sh saturn
 sh /media/fat/Scripts/xgunner_saturn_virtua_gun_map.sh
 ```
 
 Virtua Gun profile:
 
 - Trigger: `A` / shoot
-- Front button: `Start`
-- Right button: `B`
-- Middle button: `C`
+- Mouse 2: `B`
+- Mouse 3: reserved for reload/offscreen shot
+- `5`/`e`: `C`
+- `BTN_START` from the patched X-GUNNER `KEY_5` translation: `Start`
 
 Included Saturn config files:
 
@@ -211,6 +253,7 @@ New mapped/configured profiles:
 Helper scripts:
 
 ```sh
+sh /media/fat/Scripts/xgunner_map.sh
 sh /media/fat/Scripts/xgunner_nes_zapper_map.sh
 sh /media/fat/Scripts/xgunner_nes_zapper_joy2_map.sh
 sh /media/fat/Scripts/xgunner_snes_super_scope_map.sh
@@ -230,6 +273,35 @@ NES note:
 - The default NES profile now uses `Zapper(Joy1)` because the tested X-GUNNER P1 receiver is MiSTer player 1.
 - The NES core still feeds the emulated Zapper to the NES game as port 2. The Joy1/Joy2 choice selects which MiSTer input source supplies the lightgun coordinates.
 - Use `xgunner_nes_zapper_joy2_map.sh` only if you manually assign the X-GUNNER as MiSTer player 2.
+
+### Arcade Lightgun Profiles
+
+The following arcade MRA setnames now have X-GUNNER maps:
+
+- `lghost`, `lghostj`, `lghostu`: Laser Ghost.
+- `nycaptor`, `colt`, `bronx`: N.Y. Captor / related bootlegs.
+- `opwolf`, `opwolfa`, `opwolfu`, `opwolfj`, `opwolfjsc`, `opwolfp`: Operation Wolf.
+- `ptblank2a`, `ptblank2b`, `ptblank2c`, `ptblank2ua`, `gunbarla`: Point Blank 2 / Gunbarl.
+
+Arcade mapping:
+
+- Trigger: `A`, main gun/fire.
+- Mouse 2: `B`, secondary input such as grenade or special weapon.
+- Mouse 3: reserved for reload/offscreen shot.
+- `BTN_START` from the patched X-GUNNER `KEY_5` translation: `Start`.
+- `5`/`e`: third game button where the core exposes one.
+- `s`: `Coin` / `Select`.
+- `w`: `Pause` where the core exposes one.
+
+`Oh! Bakyuuun` is not included because the installed MRA says light gun is not supported by that core yet.
+
+Arcade test notes:
+
+- Operation Wolf works correctly with X-GUNNER.
+- Bronx input works, but its vertical aiming axes are rotated +90 degrees.
+- Point Blank 2 receives aim input, but does not work correctly in absolute lightgun mode; this appears to be a SYSTEM11 core issue.
+- Laser Ghost starts and the crosshair moves, but the game itself did not work correctly in testing.
+- The test MiSTer has a convenience launcher folder at `_Arcade/X-GUNNER Lightgun/`.
 
 ## Temporary Shim For Stock Main_MiSTer
 

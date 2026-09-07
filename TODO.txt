@@ -1,3 +1,33 @@
 TODO
 
-1. Make an automatic build script.
+Current verified baseline:
+
+1. Installed Main_MiSTer binary: `Main_MiSTer/binaries/MiSTer-xgunner-fw-detect-20260907`.
+2. Installed RA Main_MiSTer binary: `Main_MiSTer/binaries/MiSTer_RA-xgunner-fw-detect-20260907`.
+3. X-GUNNER firmware update still uses VID/PID `1209:0001`, but the PC now exposes serial, keyboard, mouse, and game-controller interfaces.
+4. The native patch now detects X-GUNNER P1-P4 by VID/PID only, so it does not depend on the device name containing `XGUNNER`.
+5. Aiming works again and plugging in the X-GUNNER no longer breaks the Retro-bit gamepad.
+6. The generic X-GUNNER input map created through the MiSTer OSD works and is mirrored in `config/inputs/input_1209_0001_v3.map`.
+7. `config/inputs/kbd_1209_0001.map` intentionally contains only `KEY_SPACE -> KEY_F12`.
+8. Do not remap X-GUNNER `Enter` or `Escape`. MiSTer's keyboard remap menu uses `Enter` as Finish and `Escape` as Cancel, so changing either one is unreliable.
+9. The X-GUNNER OSD menu shortcut is the gun's `Space` key.
+10. Remapping the physical X-GUNNER Enter button to `M` in the X-GUNNER GUI works without problems.
+
+Open tasks:
+
+1. Confirm after a cold boot that Space opens/closes the OSD in a core, Mouse 1 accepts OSD items, and Mouse 2 cancels/back works if mapped in the generic OSD input map.
+2. Bind the X-GUNNER GUI remapped `M` key in MiSTer like a normal game button where an extra physical button is needed.
+3. Test whether Mouse 2 and Mouse 3 can also be changed in the X-GUNNER GUI to unique keyboard keys. Leave the absolute aiming/mouse movement output unchanged.
+4. Later, investigate whether the X-GUNNER serial protocol can be driven from MiSTer to update button mappings without the PC GUI.
+5. Continue button expansion one step at a time from `contols.CSV`, with no new Enter/Escape keyboard remap changes.
+6. Add or restore reload/offscreen support per gun profile only after the current baseline is confirmed after reboot.
+7. Check whether Mouse 3 reload should remain a source-level feature or be handled only by per-core input maps.
+8. Update `LIGHTGUN_CORES.md` and README button tables after the final stable control layout is confirmed.
+9. Clean up old experimental binaries and notes once the firmware-detect baseline is tested over multiple reboots.
+
+Rejected experiments:
+
+1. Broad X-GUNNER OSD filtering caused gamepad and OSD regressions.
+2. Merge-binding changes caused player assignment instability.
+3. Scratch-minimal rebuild broke aim/trigger behavior and caused apparent continuous offscreen state.
+4. Map-only `KEY_ENTER -> KEY_F12` did not work reliably because Enter is reserved during keyboard remapping.

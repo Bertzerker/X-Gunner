@@ -3,7 +3,7 @@
 Most testers can use the prebuilt binary in this repository:
 
 ```sh
-Main_MiSTer/binaries/MiSTer-xgunner-startfix-20260904
+Main_MiSTer/binaries/MiSTer-xgunner-fw-detect-20260907
 ```
 
 Build from source if you want to review the patch, test against a newer Main_MiSTer revision, or make changes.

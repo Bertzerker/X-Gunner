@@ -1,0 +1,18 @@
+GUN,OSD,GAME
+Mouse 1,OSD Accept,Trigger
+Mouse 2,OSD Decline,A Button
+Mouse 3,,Reload (shoot offscreen)
+Space,,Start Buttton
+1,,A Button
+5,,B Button
+q,,A Button
+e,,B Button
+Enter,Close OSD,Open OSD
+w,,Pause
+a,,
+s,,Coin
+d,,
+up arrow,OSD up,
+left arrow,OSD left,
+down arrow,OSD down,
+right arrow,OSD right,

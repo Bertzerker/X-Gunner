@@ -1,15 +1,14 @@
 diff --git a/input.cpp b/input.cpp
-index 50f1991..e21c930 100644
+index 50f1991..9c66f3e 100644
 --- a/input.cpp
 +++ b/input.cpp
-@@ -1922,6 +1922,24 @@ static void input_lightgun_load(int idx)
+@@ -1922,6 +1922,23 @@ static void input_lightgun_load(int idx)
  	FileLoadConfig(name, input[idx].guncal, 4 * sizeof(int32_t));
  }
  
 +static bool input_is_xgunner(int idx)
 +{
-+	return input[idx].vid == 0x1209 && input[idx].pid >= 0x0001 && input[idx].pid <= 0x0004 &&
-+		(strstr(input[idx].name, "XGUNNER") || strstr(input[idx].id, "XGUNNER"));
++	return input[idx].vid == 0x1209 && input[idx].pid >= 0x0001 && input[idx].pid <= 0x0004;
 +}
 +
 +static void input_xgunner_setup(int idx)
@@ -27,7 +26,7 @@ index 50f1991..e21c930 100644
  int input_has_lightgun()
  {
  	for (int i = 0; i < NUMDEV; i++)
-@@ -2985,6 +3003,11 @@ static void input_cb(struct input_event *ev, struct input_absinfo *absinfo, int
+@@ -2985,6 +3002,11 @@ static void input_cb(struct input_event *ev, struct input_absinfo *absinfo, int
  		if (input[dev].kbdmap[ev->code]) ev->code = input[dev].kbdmap[ev->code];
  	}
  
@@ -39,7 +38,7 @@ index 50f1991..e21c930 100644
  	static int key_mapped = 0;
  
  	int map_skip = (ev->type == EV_KEY && mapping && ((ev->code == KEY_SPACE && mapping_type == 1) || ev->code == KEY_ALTERASE) && (mapping_dev >= 0 || mapping_button<0));
-@@ -4217,6 +4240,8 @@ void mergedevs()
+@@ -4217,6 +4239,8 @@ void mergedevs()
  				memcpy(input[i].name, input[j].name, sizeof(input[i].name));
  				memcpy(input[i].idstr, input[j].idstr, sizeof(input[i].idstr));
  
@@ -48,7 +47,7 @@ index 50f1991..e21c930 100644
  				if (!input[i].quirk)
  				{
  					//All mice as spinners
-@@ -5436,6 +5461,9 @@ int input_test(int getchar)
+@@ -5436,6 +5460,9 @@ int input_test(int getchar)
  							input_lightgun_load(n);
  						}
  
@@ -58,7 +57,7 @@ index 50f1991..e21c930 100644
  						//Sinden Lightgun (two different PIDs, four different PIDs depending on gun color/config)
  						if ((input[n].vid == 0x16c0 || input[n].vid == 0x16d0) && (
              					input[n].pid == 0x0f01 ||
-@@ -5993,7 +6021,7 @@ int input_test(int getchar)
+@@ -5993,7 +6020,7 @@ int input_test(int getchar)
  									}
  								}
  
