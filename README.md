@@ -14,9 +14,9 @@ For current testing, the recommended setup is to use the X-GUNNER GUI to remap t
 
 This is a public test package for using the X-GUNNER LCD lightgun on MiSTer FPGA.
 
-The included Main_MiSTer patch adds native detection for the X-GUNNER USB IDs and treats the gun's absolute mouse interface as a MiSTer lightgun. The package also includes map files and helper scripts for the cores that have been mapped so far.
+The included Main_MiSTer patch adds native detection for the X-GUNNER USB IDs and treats the gun's absolute mouse interface as a MiSTer lightgun. The package also includes map files and one unified helper script for the cores that have been mapped so far.
 
-Build instructions are in `BUILD.md`. Python helper requirements are in `REQUIREMENTS.txt`. Console lightgun profile notes are in `LIGHTGUN_CORES.md`.
+The current install package is in `BUILD/`. Build notes and issue notes are in `DOCS/`. Console lightgun profile notes are in `DOCS/LIGHTGUN_CORES.md`.
 
 ## Status
 
@@ -25,7 +25,6 @@ Implemented and packaged:
 - Native Main_MiSTer lightgun detection patch for X-GUNNER P1-P4 USB IDs.
 - A current patched Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer-xgunner-lightgun-only-20260907`.
 - A current patched RetroAchievements Main_MiSTer binary for testers: `Main_MiSTer/binaries/MiSTer_RA-xgunner-lightgun-only-20260907`.
-- A temporary uinput shim for testing on stock Main_MiSTer.
 - PSX GunCon and Justifier input maps.
 - Normal PSX GunCon and Justifier config profiles.
 - PSX 2X CPU GunCon and Justifier input maps for both `PSX_2XCPU` and `PSX2XCPU` launch names.
@@ -41,6 +40,7 @@ Implemented and packaged:
 Not included:
 
 - The separate input control mapper script. That tool is still experimental and is not part of this repository.
+- Old experimental binaries. Current binaries are kept in `Main_MiSTer/binaries/` and copied into `BUILD/`; old patch attempts are kept under `Main_MiSTer/patches/backup/` instead.
 - MiSTer console core `.rbf` files. The config and map files target normal and RetroAchievements core names, but users should install cores from their normal MiSTer and RetroAchievements sources.
 
 ## X-GUNNER Device IDs
@@ -98,16 +98,7 @@ SHA-256:
 f403514eabd6fd647f6f9cb7904e769b9f82511f9e9003398532aaf06ad14f31
 ```
 
-Older binaries are kept in the repository only as build history while testing:
-
-- `Main_MiSTer/binaries/MiSTer-xgunner-20260903`
-- `Main_MiSTer/binaries/MiSTer-xgunner-debounce-20260903`
-- `Main_MiSTer/binaries/MiSTer-xgunner-p1assign-20260903`
-- `Main_MiSTer/binaries/MiSTer-xgunner-splitfix-20260904`
-- `Main_MiSTer/binaries/MiSTer-xgunner-analogfix-20260904`
-- `Main_MiSTer/binaries/MiSTer-xgunner-startfix-20260904`
-- `Main_MiSTer/binaries/MiSTer-xgunner-fw-detect-20260907`
-- `Main_MiSTer/binaries/MiSTer-xgunner-lightgun-only-20260907`
+The same current binaries are also copied into `BUILD/`, which is the folder testers should use when installing the package.
 
 RetroAchievements Main_MiSTer test binary:
 
@@ -172,8 +163,6 @@ Helper scripts:
 sh /media/fat/Scripts/xgunner_map.sh
 sh /media/fat/Scripts/xgunner_map.sh psx-guncon
 sh /media/fat/Scripts/xgunner_map.sh psx-justifier
-sh /media/fat/Scripts/xgunner_psx_guncon_map.sh
-sh /media/fat/Scripts/xgunner_psx_justifier_map.sh
 ```
 
 GunCon profile:
@@ -216,7 +205,6 @@ Helper script:
 
 ```sh
 sh /media/fat/Scripts/xgunner_map.sh saturn
-sh /media/fat/Scripts/xgunner_saturn_virtua_gun_map.sh
 ```
 
 Virtua Gun profile:
@@ -249,7 +237,7 @@ RetroAchievements Saturn note:
 
 ### Additional Console Lightgun Profiles
 
-See `LIGHTGUN_CORES.md` for the full profile matrix, OSD settings, and button mappings.
+See `DOCS/LIGHTGUN_CORES.md` for the full profile matrix, OSD settings, and button mappings.
 
 New mapped/configured profiles:
 
@@ -267,16 +255,15 @@ Helper scripts:
 
 ```sh
 sh /media/fat/Scripts/xgunner_map.sh
-sh /media/fat/Scripts/xgunner_nes_zapper_map.sh
-sh /media/fat/Scripts/xgunner_nes_zapper_joy2_map.sh
-sh /media/fat/Scripts/xgunner_snes_super_scope_map.sh
-sh /media/fat/Scripts/xgunner_snes_justifier_map.sh
-sh /media/fat/Scripts/xgunner_genesis_lightgun_map.sh
-sh /media/fat/Scripts/xgunner_megacd_justifier_map.sh
-sh /media/fat/Scripts/xgunner_megacd_menacer_map.sh
-sh /media/fat/Scripts/xgunner_s32x_lightgun_map.sh
-sh /media/fat/Scripts/xgunner_sms_phaser_map.sh
-sh /media/fat/Scripts/xgunner_atari7800_xg1_map.sh
+sh /media/fat/Scripts/xgunner_map.sh nes
+sh /media/fat/Scripts/xgunner_map.sh snes-super-scope
+sh /media/fat/Scripts/xgunner_map.sh snes-justifier
+sh /media/fat/Scripts/xgunner_map.sh genesis
+sh /media/fat/Scripts/xgunner_map.sh megacd-justifier
+sh /media/fat/Scripts/xgunner_map.sh megacd-menacer
+sh /media/fat/Scripts/xgunner_map.sh s32x
+sh /media/fat/Scripts/xgunner_map.sh sms
+sh /media/fat/Scripts/xgunner_map.sh atari7800
 ```
 
 Mega Jet and Mega Gun are not included as separate named profiles because they were not exposed as current MiSTer gun-mode choices in the documentation or core option strings checked for this update.
@@ -285,7 +272,7 @@ NES note:
 
 - The default NES profile now uses `Zapper(Joy1)` because the tested X-GUNNER P1 receiver is MiSTer player 1.
 - The NES core still feeds the emulated Zapper to the NES game as port 2. The Joy1/Joy2 choice selects which MiSTer input source supplies the lightgun coordinates.
-- Use `xgunner_nes_zapper_joy2_map.sh` only if you manually assign the X-GUNNER as MiSTer player 2.
+- Use `sh /media/fat/Scripts/xgunner_map.sh nes-zapper-joy2` only if you manually assign the X-GUNNER as MiSTer player 2.
 
 ### Arcade Lightgun Profiles
 
@@ -316,36 +303,13 @@ Arcade test notes:
 - Laser Ghost starts and the crosshair moves, but the game itself did not work correctly in testing.
 - The test MiSTer has a convenience launcher folder at `_Arcade/X-GUNNER Lightgun/`.
 
-## Temporary Shim For Stock Main_MiSTer
-
-The shim is a fallback test path for users who have not replaced their Main_MiSTer binary yet.
-
-Files:
-
-```sh
-Scripts/xgunner_lightgun.sh
-Scripts/xgunner_lightgun_shim.py
-```
-
-On MiSTer, install them under `/media/fat/Scripts/`, then run:
-
-```sh
-sh /media/fat/Scripts/xgunner_lightgun.sh start
-sh /media/fat/Scripts/xgunner_lightgun.sh stop
-sh /media/fat/Scripts/xgunner_lightgun.sh status
-```
-
-The shim finds the X-GUNNER `Mouse` event device, grabs its absolute X/Y and mouse button events, and creates a virtual Retroshooter-style lightgun named `XGUNNER MiSTer Lightgun`.
-
-The virtual device uses VID/PID `0483:5750` through `0483:5753`, depending on the X-GUNNER player ID. Stock Main_MiSTer already treats those IDs as mouse-style lightguns, so this can validate the lightgun input path before testing the native patch.
-
 ## Calibration Notes
 
 Calibrate in this order:
 
 1. Put the X-GUNNER in light gun mode.
 2. Calibrate the X-GUNNER with its own five-point process.
-3. Start the patched Main_MiSTer binary or the temporary shim.
+3. Start the patched Main_MiSTer binary.
 4. Open the target MiSTer core.
 5. Open the OSD and press `F10` to run MiSTer's lightgun calibration.
 
@@ -358,16 +322,6 @@ Useful X-GUNNER hotkeys from the manual:
 - Light gun mode: `Space + 5 + Joystick Up`, or COM command `G`.
 - 4:3 mode: `Space + A`, or COM command `Q`.
 - 16:9 mode: `Space + D`, or COM command `V`.
-
-## Probe Tools
-
-These scripts are included for testers who need to confirm how their gun is being detected:
-
-- `Scripts/xgunner_probe.sh`
-- `Scripts/xgunner_abs_probe.py`
-- `Scripts/xgunner_event_probe.py`
-
-Do not post full probe reports publicly without reviewing them first. Probe reports can include connected USB device names and unique device strings.
 
 ## References
 

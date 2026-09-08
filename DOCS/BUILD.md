@@ -30,9 +30,9 @@ MiSTer test hardware:
 - A way to copy the built `MiSTer` binary to the MiSTer SD card.
 - Back up the existing `/media/fat/MiSTer` binary before replacing it.
 
-Python helper scripts:
+Python helper notes:
 
-- See `REQUIREMENTS.txt`.
+- See `DOCS/REQUIREMENTS.txt`.
 - No pip install step is needed.
 
 ## Patch Base
@@ -89,14 +89,17 @@ Copy `bin/MiSTer` to the MiSTer SD card as `/media/fat/MiSTer`, then reboot or r
 
 ## Repository Layout
 
-Files are grouped by their MiSTer install location where possible:
+Files are grouped by purpose and by MiSTer install location where possible:
 
-- `config/` contains `.CFG` files for `/media/fat/config/`.
-- `config/inputs/` contains input `.map` files for `/media/fat/config/inputs/`.
-- `Scripts/` contains helper scripts for `/media/fat/Scripts/`.
+- `BUILD/` contains the current install package.
+- `BUILD/config/` contains `.CFG` files for `/media/fat/config/`.
+- `BUILD/config/inputs/` contains input `.map` files for `/media/fat/config/inputs/`.
+- `BUILD/scripts/` contains the unified helper script for `/media/fat/Scripts/`.
+- `DOCS/` contains build notes, issue notes, task notes, and the control table.
 - `Main_MiSTer/binaries/` contains prebuilt Main_MiSTer test binaries.
-- `Main_MiSTer/patches/` contains the source patch for Main_MiSTer.
-- `LIGHTGUN_CORES.md` lists the included normal and RetroAchievements core profiles.
+- `Main_MiSTer/patches/` contains the current source patch for Main_MiSTer.
+- `Main_MiSTer/patches/backup/` contains older patch attempts kept for review.
+- `DOCS/LIGHTGUN_CORES.md` lists the included normal and RetroAchievements core profiles.
 
 ## Notes
 

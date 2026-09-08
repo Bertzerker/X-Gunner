@@ -22,19 +22,19 @@ I did not add separate Mega Jet or Mega Gun profiles because those names do not 
 
 | System | Normal core files | RetroAchievements files | Gun profile | Helper script |
 | --- | --- | --- | --- | --- |
-| PSX | `PSX.CFG`, `PSX_input_1209_0001_v3.map` | `RA_PSX.CFG`, `RA_PSX_input_1209_0001_v3.map` | GunCon default, Justifier optional | `Scripts/xgunner_psx_guncon_map.sh`, `Scripts/xgunner_psx_justifier_map.sh` |
-| PSX 2X CPU | `PSX_2XCPU.CFG`, `PSX_2XCPU_input_1209_0001_v3.map`, `PSX2XCPU.CFG`, `PSX2XCPU_input_1209_0001_v3.map` | n/a | GunCon default, Justifier optional | `Scripts/xgunner_psx_guncon_map.sh`, `Scripts/xgunner_psx_justifier_map.sh` |
-| Saturn | `Saturn.CFG`, `Saturn_input_1209_0001_v3.map`, `A0CD-Saturn.CFG`, `A0CD-Saturn_input_1209_0001_v3.map` | `RA_Saturn.CFG`, `RA_Saturn_input_1209_0001_v3.map` | Virtua Gun | `Scripts/xgunner_saturn_virtua_gun_map.sh` |
-| NES | `NES.CFG`, `NES_input_1209_0001_v3.map` | `RA_NES.CFG`, `RA_NES_input_1209_0001_v3.map` | Zapper, Joy1 source default | `Scripts/xgunner_nes_zapper_map.sh` |
-| NES | `NES.zapper_joy2.CFG`, `NES_input_1209_0001_v3.zapper.map` | `RA_NES.zapper_joy2.CFG`, `RA_NES_input_1209_0001_v3.zapper.map` | Zapper, Joy2 source fallback | `Scripts/xgunner_nes_zapper_joy2_map.sh` |
-| SNES | `SNES.CFG`, `SNES_input_1209_0001_v3.map` | `RA_SNES.CFG`, `RA_SNES_input_1209_0001_v3.map` | Super Scope default | `Scripts/xgunner_snes_super_scope_map.sh` |
-| SNES | `SNES.justifier.CFG`, `SNES_input_1209_0001_v3.justifier.map` | `RA_SNES.justifier.CFG`, `RA_SNES_input_1209_0001_v3.justifier.map` | Justifier | `Scripts/xgunner_snes_justifier_map.sh` |
-| Genesis / Mega Drive | `Genesis.CFG`, `Genesis_input_1209_0001_v3.map` | `RA_MegaDrive.CFG`, `RA_MegaDrive_input_1209_0001_v3.map` | Core lightgun mode | `Scripts/xgunner_genesis_lightgun_map.sh` |
-| MegaCD / Sega CD | `MegaCD.CFG`, `MegaCD_input_1209_0001_v3.map` | `RA_MegaCD.CFG`, `RA_MegaCD_input_1209_0001_v3.map` | Justifier default | `Scripts/xgunner_megacd_justifier_map.sh` |
-| MegaCD / Sega CD | `MegaCD.menacer.CFG`, `MegaCD_input_1209_0001_v3.menacer.map` | `RA_MegaCD.menacer.CFG`, `RA_MegaCD_input_1209_0001_v3.menacer.map` | Menacer | `Scripts/xgunner_megacd_menacer_map.sh` |
-| S32X | `S32X.CFG`, `S32X_input_1209_0001_v3.map` | `RA_S32X.CFG`, `RA_S32X_input_1209_0001_v3.map` | Core lightgun mode | `Scripts/xgunner_s32x_lightgun_map.sh` |
-| SMS | `SMS.CFG`, `SMS_input_1209_0001_v3.map` | `RA_SMS.CFG`, `RA_SMS_input_1209_0001_v3.map` | Phaser | `Scripts/xgunner_sms_phaser_map.sh` |
-| Atari 7800 | `Atari7800.CFG`, `Atari7800_input_1209_0001_v3.map` | `RA_Atari7800.CFG`, `RA_Atari7800_input_1209_0001_v3.map` | XG-1 | `Scripts/xgunner_atari7800_xg1_map.sh` |
+| PSX | `PSX.CFG`, `PSX_input_1209_0001_v3.map` | `RA_PSX.CFG`, `RA_PSX_input_1209_0001_v3.map` | GunCon default, Justifier optional | `Scripts/xgunner_map.sh psx-guncon`, `Scripts/xgunner_map.sh psx-justifier` |
+| PSX 2X CPU | `PSX_2XCPU.CFG`, `PSX_2XCPU_input_1209_0001_v3.map`, `PSX2XCPU.CFG`, `PSX2XCPU_input_1209_0001_v3.map` | n/a | GunCon default, Justifier optional | `Scripts/xgunner_map.sh psx-guncon`, `Scripts/xgunner_map.sh psx-justifier` |
+| Saturn | `Saturn.CFG`, `Saturn_input_1209_0001_v3.map`, `A0CD-Saturn.CFG`, `A0CD-Saturn_input_1209_0001_v3.map` | `RA_Saturn.CFG`, `RA_Saturn_input_1209_0001_v3.map` | Virtua Gun | `Scripts/xgunner_map.sh saturn` |
+| NES | `NES.CFG`, `NES_input_1209_0001_v3.map` | `RA_NES.CFG`, `RA_NES_input_1209_0001_v3.map` | Zapper, Joy1 source default | `Scripts/xgunner_map.sh nes` |
+| NES | `NES.zapper_joy2.CFG`, `NES_input_1209_0001_v3.zapper.map` | `RA_NES.zapper_joy2.CFG`, `RA_NES_input_1209_0001_v3.zapper.map` | Zapper, Joy2 source fallback | `Scripts/xgunner_map.sh nes-zapper-joy2` |
+| SNES | `SNES.CFG`, `SNES_input_1209_0001_v3.map` | `RA_SNES.CFG`, `RA_SNES_input_1209_0001_v3.map` | Super Scope default | `Scripts/xgunner_map.sh snes-super-scope` |
+| SNES | `SNES.justifier.CFG`, `SNES_input_1209_0001_v3.justifier.map` | `RA_SNES.justifier.CFG`, `RA_SNES_input_1209_0001_v3.justifier.map` | Justifier | `Scripts/xgunner_map.sh snes-justifier` |
+| Genesis / Mega Drive | `Genesis.CFG`, `Genesis_input_1209_0001_v3.map` | `RA_MegaDrive.CFG`, `RA_MegaDrive_input_1209_0001_v3.map` | Core lightgun mode | `Scripts/xgunner_map.sh genesis` |
+| MegaCD / Sega CD | `MegaCD.CFG`, `MegaCD_input_1209_0001_v3.map` | `RA_MegaCD.CFG`, `RA_MegaCD_input_1209_0001_v3.map` | Justifier default | `Scripts/xgunner_map.sh megacd-justifier` |
+| MegaCD / Sega CD | `MegaCD.menacer.CFG`, `MegaCD_input_1209_0001_v3.menacer.map` | `RA_MegaCD.menacer.CFG`, `RA_MegaCD_input_1209_0001_v3.menacer.map` | Menacer | `Scripts/xgunner_map.sh megacd-menacer` |
+| S32X | `S32X.CFG`, `S32X_input_1209_0001_v3.map` | `RA_S32X.CFG`, `RA_S32X_input_1209_0001_v3.map` | Core lightgun mode | `Scripts/xgunner_map.sh s32x` |
+| SMS | `SMS.CFG`, `SMS_input_1209_0001_v3.map` | `RA_SMS.CFG`, `RA_SMS_input_1209_0001_v3.map` | Phaser | `Scripts/xgunner_map.sh sms` |
+| Atari 7800 | `Atari7800.CFG`, `Atari7800_input_1209_0001_v3.map` | `RA_Atari7800.CFG`, `RA_Atari7800_input_1209_0001_v3.map` | XG-1 | `Scripts/xgunner_map.sh atari7800` |
 
 ## Arcade Profiles
 
@@ -86,7 +86,7 @@ Arcade test notes:
 
 `Oh! Bakyuuun` was found in the arcade list, but its MRA explicitly says light gun is not supported yet. It is not a mapping problem.
 
-Profile-specific files are included beside the active/default files. For example, SNES includes both `SNES.super_scope.CFG` and `SNES.justifier.CFG`, and the helper scripts copy the requested profile over `SNES.CFG` and the active map name.
+Profile-specific files are included beside the active/default files. For example, SNES includes both `SNES.super_scope.CFG` and `SNES.justifier.CFG`, and the unified helper script copies the requested profile over `SNES.CFG` and the active map name.
 
 ## Core OSD Settings
 
@@ -139,7 +139,7 @@ Profile-specific files assign that default table to each core's button order:
 | Atari 7800 XG-1 | Fire 1 | Not mapped | Reserved reload/offscreen | OSD menu | Not mapped | Not mapped | Not mapped | Not mapped |
 | Arcade gun games | A / trigger | B / secondary weapon | Reserved reload/offscreen | OSD menu | Start | Third button where exposed | Coin / Select | Pause where exposed |
 
-Mouse3 reload/offscreen is reserved in the profile layout, but should be re-added only after the current firmware-detect baseline is confirmed stable.
+Mouse3 reload/offscreen is reserved in the profile layout for profiles and cores where MiSTer can expose it cleanly.
 
 ## NES Test Note
 
